@@ -8,20 +8,36 @@
 ## 环境搭建 ##
 - 安装log4c1.2.4<br>
 ./configure  --prefix=/usr/local/lib/log4c/<br>
-./make<br>
-./make install<br>
+make<br>
+make install<br>
 将liglog4c.so.3所在目录/usr/local/lib/log4c/lib/添加到文件/etc/ld.so.conf中<br>
-执行：ldconfig<br><br>
+执行：sudo ldconfig<br><br>
 - 安装 librdkafka-0.9.3<br>
 ./configure<br>
-./make<br>
-./make install<br>
+make<br>
+sudo make install<br>
 将librdkafka.so所在目录/usr/local/lib/加入/etc/ld.so.conf文件中<br>
-安装完毕后执行ldconfig<br><br>
+安装完毕后执行sudo ldconfig<br><br>
 - 修改系统hosts 增加kafka 的brokers<br>
 - 编译执行程序：<br>
 下载项目源码，进入Release目录，执行make all，即可在当前目录下生成 ctk 的可执行文件。<br>
 启动程序：修改log4crc文件的logdir日志目录，修改config.ini对应配置，执行 nohup ./ctk &<br><br>
+- ctk 开发环境搭建
+  - IDE: eclipse cpp-neon
+  - 系统环境安装依赖包：log4c1.2.4，librdkafka0.9.3
+  - eclipse新建项目，导入项目文件
+  - 项目右键->Properties->C/C++ Build->Settings->Tool Settings->GCC C Compiler->Includes->Include paths(-I)
+  - 添加：/usr/local/lib/log4c/include
+  - 添加：/usr/local/lib/log4c/lib64
+  - 添加：/usr/local/lib
+  - 项目右键->Properties->C/C++ Build->Settings->Tool Settings->GCC C Linker->Libraries->Libraries(-l)
+  - 添加：log4c
+  - 添加：rdkafka
+  - 项目右键->Properties->C/C++ Build->Settings->Tool Settings->GCC C Linker->Libraries->Library search path(-L)
+  - 添加：/usr/local/lib/log4c/lib64
+  - 此处注意是lib64还是lib，有些平台是/usr/local/lib/log4c/lib
+- Syntax and Semantic Error
+  - 取消 "Preference" —> "C/C++" -> "Code Analysis" -> “Syntax and Semantic Error”
 
 --------------------------------------------------------------------------------
 ## 使用 ##
